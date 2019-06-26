@@ -1,0 +1,34 @@
+autoScrollBoardsContainer: function(event){
+        // the goal is to auto scroll to left and right when mouse nears the edges
+        var edgeleft = 100;
+        var edgeRight = 100;
+        var edgeBottom = 100; //todo: get a flexible value instead of this hard coded one
+        var edgeTop = 100; //todo: get a flexible value instead of this hard coded one
+        
+        if (event.pageX < edgeleft) {
+            autoScroll.start('left', $('#board_container'));
+           
+        }
+        else if(event.pageX >= $( window ).width() - edgeRight ){
+            console.log(event.pageX)
+            autoScroll.start('right', $('#board_container'));
+        }
+        else if(event.pageY >= $( window ).height() - edgeBottom ){
+            //scroll the column
+            //todo: only get the active column - maybe just determine parent of the current ui.placeholder?
+            autoScroll.start('bottom', $('.list-group.tiles'));
+        }
+        else if(event.pageY <= edgeTop ){
+            console.log('yes', event.pageY)
+            //scroll the column
+            //todo: only get the active column - maybe just determine parent of the current ui.placeholder?
+            autoScroll.start('top', $('.list-group.tiles'));
+        }
+
+        // TODO: is there a better way to call this?
+        else{
+            autoScroll.stop($('#board_container'));
+            autoScroll.stop($('.list-group.tiles'));
+        }
+
+    },
